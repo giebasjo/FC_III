@@ -41,19 +41,17 @@ class BinaryTree:
     def size(self):
         return len(self._list)
 
-    def depth_helper(self, node):
-
-        if node is None:
-            return 0
-        else:
-            l_depth = self.depth_helper(node._left)
-            r_depth = self.depth_helper(node._right)
-
-        return max(l_depth, r_depth) + 1
-
     def depth(self):
-        return self.depth_helper(self._top)
 
+        def depth_helper(node):
+            if node is None:
+                return 0
+            else:
+                l_depth = depth_helper(node._left)
+                r_depth = depth_helper(node._right)
+            return max(l_depth, r_depth) + 1
+
+        return depth_helper(self._top)
 
     def print_pretty_helper(self, node, level):
 
@@ -70,7 +68,6 @@ class BinaryTree:
     def print_pretty(self):
 
         if self._top == None:
-            print("True")
             return ""
 
         self.print_pretty_helper(self._top,0)
