@@ -1,6 +1,8 @@
-
 # File: BinaryTree.py
-# Author(s): Jordan Giebas
+# Author(s): Lucas Duarte Bahia
+#            Jordan Giebas
+#            Harveen Oberoi
+#            Daniel Rojas Coy
 
 class BinaryTree:
 
@@ -42,7 +44,6 @@ class BinaryTree:
         return len(self._list)
 
     def depth(self):
-
         def depth_helper(node):
             if node is None:
                 return 0
@@ -53,25 +54,22 @@ class BinaryTree:
 
         return depth_helper(self._top)
 
-    def print_pretty_helper(self, node, level):
-
-        if self._top == None:
-            return ""
-        
-        self.print_pretty_helper(self._top._right, level + 1)
-        for i in range(level):
-            print('\t')
-        
-        print(self._top._value)
-        self.print_pretty_helper(self._top._left, level + 1)
-
     def print_pretty(self):
+        def pp_helper(node, level):
+            if node is None:
+                return
+            pp_helper(node._right, level+1)
+            tmp_str = ""
+            for i in range(level):
+                tmp_str += "\t"
+            print(tmp_str + str(node._value) + "\n")
+            pp_helper(node._left, level+1)
+
 
         if self._top == None:
-            return ""
+            return
 
-        self.print_pretty_helper(self._top,0)
-
+        pp_helper(self._top, 0)
 
 # test code:
 bt = BinaryTree()
@@ -84,12 +82,11 @@ bt.insert(3)
 bt.insert(2)
 bt.insert(13)
 bt.insert(9)
-bt.insert(3)
+bt.insert(3) # ignores since duplicate
 print("--done inserting--")
 print("Printing Binary Tree: ", bt)
 print("Tree Size: ", bt.size())
 print("Tree Depth: ", bt.depth())
-#print("Printing pretty --- ")
-#bt.print_pretty()
-
+print("Printing pretty --- ")
+bt.print_pretty()
 
