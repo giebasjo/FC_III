@@ -16,26 +16,42 @@ class BinaryTree:
         self._top  = None
         self._list = list()
 
-    def insert(self, value):
+    def insert(self, value, node = None):
 
         if self._top == None:
             self._top = self._BTNode(value)
             self._list.append( str(value) )
-        else:
+        elif node==None:
             if value < self._top._value:
                 if self._top._left == None:
                     self._top._left = self._BTNode(value)
                     self._list.append( str(value) )
                 else:
-                    self._top = self._top._left
-                    self.insert(value)
+                    # self._top = self._top._left
+                    self.insert(value, self._top._left)
             elif value > self._top._value:
                 if self._top._right == None:
-                    self._top._right == self._BTNode(value)
+                    self._top._right = self._BTNode(value)
                     self._list.append( str(value) )
                 else:
-                    self._top = self._top._right
-                    self.insert(value)
+                    # self._top = self._top._right
+                    self.insert(value, self._top._right)
+        else:
+            if value < node._value:
+                if node._left == None:
+                    node._left = self._BTNode(value)
+                    self._list.append( str(value) )
+                else:
+                    # self._top = self._top._left
+                    self.insert(value, node._left)
+            elif value > node._value:
+                if node._right == None:
+                    node._right = self._BTNode(value)
+                    self._list.append( str(value) )
+                else:
+                    # self._top = self._top._right
+                    self.insert(value, node._right)
+
 
     def __str__(self):
         return " ".join(self._list)
@@ -55,6 +71,7 @@ class BinaryTree:
         return depth_helper(self._top)
 
     def print_pretty(self):
+
         def pp_helper(node, level):
             if node is None:
                 return
@@ -62,7 +79,8 @@ class BinaryTree:
             tmp_str = ""
             for i in range(level):
                 tmp_str += "\t"
-            print(tmp_str + str(node._value) + "\n")
+            print(tmp_str + str(node._value))
+
             pp_helper(node._left, level+1)
 
 
@@ -89,4 +107,3 @@ print("Tree Size: ", bt.size())
 print("Tree Depth: ", bt.depth())
 print("Printing pretty --- ")
 bt.print_pretty()
-
