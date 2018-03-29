@@ -1,3 +1,8 @@
+# Author(s): Lucas Duarte Bahia
+#            Jordan Giebas
+#            Harveen Oberoi
+#            Daniel Rojas Coy
+
 from math import *
 
 class EuropeanCallOption:
